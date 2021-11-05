@@ -1,4 +1,5 @@
 const path = require('path');
+const CONFIG = require('./config.js');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -6,7 +7,7 @@ const config = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname + '/dist'),
-    filename: '[name].build.js',
+    filename: `${CONFIG.js}[name].js?[hash:8]`,
   },
   module: {
     rules: [
@@ -30,13 +31,18 @@ const config = {
       },
       {
         // 圖片
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif)(\?.*)?$/,
         use: {
           loader: 'url-loader',
           options: {
             limit: 25000,
+            name: '[path][name].[ext]?[hash:8]'
           },
         },
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
       },
       {
         // *.js

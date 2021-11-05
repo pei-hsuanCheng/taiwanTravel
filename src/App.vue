@@ -1,36 +1,32 @@
 <template>
-  <div class="example">
-    <h1 class="bg-red-900 text-white">Hello world</h1>
-    {{ msg }}
-    <img :src="url" />
+  <div id="app">
+    <main class="overflow-hidden bg-background">
+      <Header />
+      <article class="max-w-[1366px] mx-auto p:px-52 t:px-32 m:px-10 p:pt-80 tm:pt-60">
+        <router-view />
+      </article>
+      <Footer />
+    </main>
   </div>
 </template>
 
 <script>
-import logo from './assets/cover.png';
-import getData from './utils/getData';
+import Header from './_components/common/Header.vue';
+import Footer from './_components/common/Footer.vue';
 
 export default {
+  components: {
+    Header, Footer
+  },
   data() {
     return {
-      msg: 'Hello Webpack',
-      url: logo,
     };
   },
   methods: {
-    async fetchData() {
-      const data = await getData();
-      this.msg = data;
-    },
   },
   created() {
-    this.fetchData();
   },
 };
 </script>
 
-<style>
-.example {
-  color: red;
-}
-</style>
+<style></style>
