@@ -1,5 +1,6 @@
 const path = require('path');
 const CONFIG = require('./config.js');
+const MINiCSSEXTRACTPLUGIN = require('mini-css-extract-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -19,7 +20,18 @@ const config = {
       {
         // `*.vue` 檔案中的 `<style>` 塊以及普通的`*.css`
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader', 'postcss-loader'],
+        use: [
+          {
+            loader: MINiCSSEXTRACTPLUGIN.loader,
+            options: {
+              publicPath: (resourcePath, context) => {
+                return (path.relative(path.dirname(resourcePath), context).replace(/\\/g, '/')) + '/';
+              }
+            }
+          },
+          'css-loader',
+          'postcss-loader'
+        ],
       },
       {
         test: /\.postcss$/,
@@ -32,11 +44,12 @@ const config = {
       {
         // 圖片
         test: /\.(png|jpe?g|gif)(\?.*)?$/,
+        include: path.resolve(__dirname, `src/${CONFIG.imgs}`),
         use: {
           loader: 'url-loader',
           options: {
             limit: 25000,
-            name: '[path][name].[ext]?[hash:8]'
+            name: (CONFIG.imgs + '[name].[ext]?[hash:8]')
           },
         },
       },
@@ -58,6 +71,9 @@ const config = {
       filename: 'index.html', // 生成的資料夾名
       template: 'public/index.html', // 模板html
       favicon: 'public/favicon.ico', // 圖示
+    }),
+    new MINiCSSEXTRACTPLUGIN({
+      filename: (CONFIG.css + '[name].css?[hash:8]')
     }),
   ],
   resolve: {

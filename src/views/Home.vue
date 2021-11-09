@@ -1,18 +1,16 @@
 <template>
-  <p>home</p>
-</template>
+  <div class="lCnt">
+    <Kv />
+    <p>home</p>
+  </div>
+</template> 
 
 <script>
-import $global from '../Global.vue';
+import Kv from '../_components/common/Kv';
 
 export default {
-  data() {
-    return {
-      test: $global.testGlobal,
-    }
-  },
-  mounted() {
-    this.test = 'I changed the value!'
+  components: {
+    'Kv': Kv
   }
 }
 </script>

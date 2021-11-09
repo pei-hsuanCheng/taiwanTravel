@@ -2,7 +2,7 @@
   <div id="app">
     <main class="overflow-hidden bg-background">
       <Header />
-      <article class="max-w-[1366px] mx-auto p:px-52 t:px-32 m:px-10 p:pt-80 tm:pt-60">
+      <article class="lM">
         <router-view />
       </article>
       <Footer />
