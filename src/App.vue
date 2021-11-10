@@ -29,4 +29,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.lM {
+  margin-top: 106px;
+}
+</style>
