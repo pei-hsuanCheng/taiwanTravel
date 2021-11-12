@@ -2,16 +2,22 @@
   <header class="lH fixed top-0 left-0 w-full bg-xf">
     <h1 class="absolute w-0 h-0 opacity-0">Taiwan Tourguid</h1>
     <div class="mHd box-border pt:pt-28 pt:pb-20 m:pt-14 m:pb-20 m:px-16 flex justify-between pt:items-start m:items-center m:flex-col">
-      <SvgIcon icon="logo" class="logo"></SvgIcon>
+      <router-link to="/">
+        <SvgIcon icon="logo" class="logo"></SvgIcon>
+      </router-link>
       <ul class="flex items-center m:justify-around m:rounded m:shadow m:w-full m:mt-12">
         <li v-for="item in menu" :key="item.text" :class="item.icon" class="navitem pt:mx-14 m:py-10">
           <router-link
+            v-if="item.name!=='spot'"
             class="pt:underline"
             :class="'pt:text-x'+item.color"
             :to="item.url"
           >
             {{ item.text }}
           </router-link>
+          <a v-else class="pt:underline" :class="'pt:text-x'+item.color" href="https://www.taiwantrip.com.tw/Frontend/Route/Select_p?RouteID=R0001" target="_blank">
+            {{ item.text }}
+          </a>
         </li>
       </ul>
     </div>
@@ -26,8 +32,8 @@ export default {
         {
           color: 'f16c',
           icon: 'triangle',
-          url: '/',
-          name: 'Home',
+          url: 'https://www.taiwantrip.com.tw/Frontend/Route/Select_p?RouteID=R0001',
+          name: 'spot',
           text: '台灣景點',
         }, {
           color: 'fb2c',
