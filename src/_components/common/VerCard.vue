@@ -1,15 +1,17 @@
 <template>
-  <Paper class="mVerCard p-12 bg-xf mb-32 mx-5">
-    <template #Paper_children>
-      <figure class="mb-10">
-        <img class="mVerCardImg object-cover" :src="data.Picture.PictureUrl1?data.Picture.PictureUrl1:imgPlaceholder" width="100%" height="100%" alt="data.Name" />
-      </figure>
-      <div class="mVerCardCnt">
-        <h4 class="mVerCardTxt text-14 text-x000c mb-14 --sm">{{data.Name}}</h4>
-        <span class="mVerCardFtAddr text-12 text-x0750">{{data.Address.substring(0,6)}}</span>
-      </div>
-    </template>
-  </Paper>
+    <Paper class="mVerCard mb-32 mx-5">
+      <template #Paper_children>
+  <button type="button" class="w-full text-left p-12 bg-xf" @click="click()">
+        <figure class="mb-10">
+          <img class="mVerCardImg object-cover" :src="data.Picture.PictureUrl1?data.Picture.PictureUrl1:imgPlaceholder" width="100%" height="100%" alt="data.Name" />
+        </figure>
+        <div class="mVerCardCnt">
+          <h4 class="mVerCardTxt text-14 text-x000c mb-14 --sm">{{data.Name}}</h4>
+          <span class="mVerCardFtAddr text-12 text-x0750">{{data.Address.substring(0,6)}}</span>
+        </div>
+  </button>
+      </template>
+    </Paper>
 </template>
 
 <script>
@@ -28,6 +30,11 @@ export default {
   data() {
     return {
       imgPlaceholder: imgPlaceholder
+    }
+  },
+  methods: {
+    click(){
+      this.$emit('clickFunc', this.data);
     }
   }
 }

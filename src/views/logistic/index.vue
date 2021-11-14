@@ -84,6 +84,11 @@
       <template #Paper_children>
         <div class="mLogisticCnt pt:p-52 m:p-16 relative">
           <p v-if="!data" class="text-xac text-24">請選擇公車路線</p>
+          <ul v-else>
+            <li v-for="stop in stops" :key="stop.name">
+
+            </li>
+          </ul>
         </div>
       </template>
     </Paper>
@@ -107,7 +112,7 @@ export default {
       selectedRoute: "all",
       selectedRouteDetail: null,
       routes: null,
-      data: null,
+      stops: null,
     };
   },
   methods: {
@@ -126,7 +131,7 @@ export default {
     getCityRouteTimeTable(event) {
       const { target } = event;
       const { value } = target;
-      debugger;
+
       const selected = this.routes[value];
       this.selectedRoute = selected.RouteName.Zh_tw;
       this.selectedRouteDetail = selected;
@@ -141,11 +146,8 @@ export default {
           ),
         ])
         .then((resBusPositions, resAllStops) => {
-          const busPositions = resBusPositions.data;
-          const allStops = resAllStops.data;
-          this.data = allStops.map(item => {
-
-          });
+          // const busPositions = resBusPositions.data;
+          this.stops = resAllStops.data;
         });
     },
   },

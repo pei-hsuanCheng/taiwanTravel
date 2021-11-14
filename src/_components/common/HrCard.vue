@@ -9,7 +9,7 @@
         <p class="mHrCardTxt text-14 text-xac mb-10">{{data.DescriptionDetail}}</p>
         <div class="mHrCardFt flex justify-between items-center">
           <span class="mHrCardFtAddr">{{data.Address.substring(0,6)}}</span>
-          <button type="button" class="text-xf16c border border-xf16c rounded-lg py-10 px-32">活動詳情</button>
+          <button type="button" class="text-xf16c border border-xf16c hover:text-red-700 hover:border-red-700 transition duration-300 rounded-lg py-10 px-32" @click="click()">活動詳情</button>
         </div>
       </div>
     </template>
@@ -31,7 +31,12 @@ export default {
   },
   data() {
     return {
-      imgPlaceholder:  imgPlaceholder,
+      imgPlaceholder:  imgPlaceholder
+    }
+  },
+  methods: {
+    click(){
+      this.$emit('clickFunc', this.data);
     }
   }
 }
